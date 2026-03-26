@@ -1,0 +1,111 @@
+student_id,first_name,last_name,age,major,gpa,attendance,scholarship,city,status
+STU_1000,Liam,Smith,22,Mathematics,3.84,0.95,3000,Seattle,Paid
+STU_1001,Olivia,Miller,19,computer science,,0.62,0,Austin,Pending
+STU_1002,Noah,Davis,25,Physics,2.11,0.88,0,Miami,Paid
+STU_1003,Emma,Garcia,21,Economics,3.55,0.74,1500,Boston,Paid
+STU_1004,Oliver,Jones,28,Art,2.9,0.99,5000,Denver,Overdue
+STU_1005,Sophia,Williams,20,Biology,3.12,0.81,0,New York,Paid
+STU_1006,Lucas,Rodriguez,23,Data Science,,0.55,0,Chicago,Pending
+STU_1007,Mia,Lopez,22,Philosophy,3.98,0.92,3000,Seattle,Paid
+STU_1008,Ethan,Smith,27,mathematics,2.45,0.67,0,Austin,Paid
+STU_1009,Ava,Miller,19,Physics,3.2,0.79,1500,Miami,Paid
+STU_1010,Chloe,Adams,28,Computer Science,3.48,0.55,1000,Philadelphia,Overdue
+STU_1011,Camila,Adams,18,Data Science,,0.53,0,Los Angeles,Paid
+STU_1012,Abigail,Martin,25,Physics,3.62,0.4,2000,Chicago,Pending
+STU_1013,Noah,King,30,Engineering,2.19,0.46,0,Boston,Paid
+STU_1014,Camila,Jones,24,Mathematics,2.59,0.78,0,Los Angeles,Paid
+STU_1015,Avery,Lee,30,Physics,2.16,0.54,0,Dallas,Paid
+STU_1016,Elijah,Adams,23,History,2.53,0.96,0,Los Angeles,Paid
+STU_1017,Riley,Garcia,20,Economics,2.54,0.96,0,Austin,Pending
+STU_1018,Ella,Hall,30,Political Science,2.54,0.53,0,Phoenix,Paid
+STU_1019,Sofia,Nelson,20,Data Science,2.49,0.74,0,Dallas,Pending
+STU_1020,Ava,Moore,21,English,2.28,0.7,0,Philadelphia,Pending
+STU_1021,Liam,Lopez,27,Chemistry,2.76,1,0,San Francisco,Overdue
+STU_1022,Christian,Harris,30,Engineering,2.22,0.66,500,New York,Paid
+STU_1023,James,Wilson,26,Biology,3.74,0.58,5000,New York,Pending
+STU_1024,Olivia,Lopez,26,Political Science,3.84,0.95,4000,Dallas,Paid
+STU_1025,Ella,Jones,30,English,2.12,0.93,0,Denver,Paid
+STU_1026,Sofia,Thomas,20,Political Science,3.89,0.5,4000,Chicago,Overdue
+STU_1027,Joseph,Lopez,29,Economics,3.99,0.79,3000,Los Angeles,Pending
+STU_1028,Camila,Garcia,19,Economics,3.18,0.54,1000,Miami,Paid
+STU_1029,Ethan,Gonzalez,18,Psychology,2.14,0.54,500,San Diego,Paid
+STU_1030,Daniel,Young,21,Data Science,3.61,0.51,1500,Phoenix,Pending
+STU_1031,Abigail,Rodriguez,29,Economics,3.31,0.79,0,Chicago,Paid
+STU_1032,Oliver,Hernandez,21,English,2.28,0.51,500,Boston,Paid
+STU_1033,Charlotte,Moore,18,Data Science,3.08,0.41,0,San Diego,Overdue
+STU_1034,Matthew,Harris,25,Political Science,2.8,0.44,500,Phoenix,Paid
+STU_1035,Ella,Wilson,22,Economics,3.91,1,4000,Portland,Paid
+STU_1036,Victoria,Wright,21,Engineering,3.16,0.73,1500,New York,Paid
+STU_1037,Charlotte,Hall,18,Computer Science,2.16,0.51,0,Los Angeles,Pending
+STU_1038,Amelia,Robinson,27,Economics,3.24,0.65,1500,San Francisco,Pending
+STU_1039,Aria,Gonzalez,24,Computer Science,3.29,0.67,0,Miami,Paid
+STU_1040,Emily,Thompson,26,Physics,2.53,0.96,0,Phoenix,Pending
+STU_1041,Scarlett,Martinez,26,Political Science,3.22,0.99,0,Boston,Pending
+STU_1042,John,Thomas,20,History,3.78,0.85,2000,Atlanta,Paid
+STU_1043,Emma,Williams,21,Chemistry,3.71,0.7,2500,Philadelphia,Pending
+STU_1044,William,Moore,22,History,,0.6,0,Phoenix,Paid
+STU_1045,Emily,Nelson,26,Engineering,3.12,0.47,1000,Denver,Pending
+STU_1046,Amelia,White,24,Chemistry,2.62,0.94,0,Boston,Pending
+STU_1047,Charlotte,Moore,23,English,3.77,0.64,4000,New York,Paid
+STU_1048,David,White,24,Art,,0.84,0,New York,Pending
+STU_1049,Avery,Lewis,30,Art,2.77,0.42,500,Los Angeles,Paid
+STU_1050,Oliver,Martin,21,Biology,,0.52,0,Houston,Paid
+STU_1051,William,Taylor,28,Psychology,3.07,0.96,0,San Francisco,Pending
+STU_1052,Andrew,Lopez,18,Data Science,2.87,0.84,0,Chicago,Paid
+STU_1053,Oliver,Clark,22,Psychology,,0.66,0,Atlanta,Paid
+STU_1054,Michael,Hall,28,History,3.44,0.58,1500,Portland,Pending
+STU_1055,Evelyn,Hall,26,Engineering,2.84,0.96,0,Seattle,Paid
+STU_1056,Joseph,Thomas,22,Engineering,2.86,0.75,0,San Diego,Paid
+STU_1057,Nathan,Mitchell,30,Biology,3.59,0.5,1500,Miami,Paid
+STU_1058,Charlotte,Wright,30,Psychology,2.62,0.88,0,Miami,Paid
+STU_1059,Charlotte,Wilson,25,Chemistry,3.26,0.52,2000,Seattle,Pending
+STU_1060,Ryan,Green,30,Philosophy,3.77,0.87,2000,Austin,Paid
+STU_1061,Scarlett,Carter,26,Biology,3.7,0.67,3000,Phoenix,Paid
+STU_1062,Elijah,Wright,27,Philosophy,3.78,0.66,4000,San Francisco,Paid
+STU_1063,Harper,Hernandez,30,Computer Science,3.28,0.86,2000,Portland,Paid
+STU_1064,Matthew,Wilson,21,History,2.64,0.72,0,Chicago,Paid
+STU_1065,David,Walker,19,Political Science,2.66,0.68,0,Seattle,Paid
+STU_1066,David,Adams,30,History,2.95,0.97,0,Los Angeles,Pending
+STU_1067,Elizabeth,Moore,25,Sociology,2.87,0.42,0,Phoenix,Pending
+STU_1068,Sofia,Brown,20,Sociology,3.07,0.94,0,Phoenix,Paid
+STU_1069,Matthew,Martin,20,English,2.76,0.53,0,Philadelphia,Paid
+STU_1070,Daniel,Jackson,22,Chemistry,2.94,0.85,0,Miami,Overdue
+STU_1071,Olivia,Mitchell,30,Physics,2.08,0.42,0,Los Angeles,Paid
+STU_1072,Riley,Lee,20,Physics,2.23,0.97,500,Boston,Paid
+STU_1073,Christopher,Walker,30,Data Science,3.93,0.46,1500,Chicago,Overdue
+STU_1074,Chloe,Carter,19,English,3.66,0.55,5000,Boston,Overdue
+STU_1075,Oliver,Scott,30,Chemistry,3.57,0.61,3000,Atlanta,Paid
+STU_1076,Avery,Wilson,18,Data Science,3.64,0.46,2500,New York,Pending
+STU_1077,Christian,Nelson,29,Art,3.3,0.77,2000,Atlanta,Paid
+STU_1078,Christopher,Mitchell,21,Chemistry,2.17,0.93,0,Houston,Pending
+STU_1079,Daniel,Harris,23,Biology,,0.91,0,San Francisco,Paid
+STU_1080,Christian,Allen,27,Philosophy,2.55,0.41,0,Los Angeles,Paid
+STU_1081,Benjamin,Hall,29,History,3.42,0.67,0,Los Angeles,Paid
+STU_1082,Penelope,Baker,22,Biology,2.74,0.73,0,Dallas,Paid
+STU_1083,Penelope,Adams,29,English,2.61,0.54,0,New York,Paid
+STU_1084,James,Thompson,21,Economics,2.97,0.83,0,Dallas,Overdue
+STU_1085,Scarlett,Thompson,20,History,3.42,0.48,0,Denver,Overdue
+STU_1086,Joseph,Clark,28,Physics,2.98,0.92,0,Austin,Paid
+STU_1087,Christopher,Garcia,22,Physics,2.96,0.89,500,Denver,Paid
+STU_1088,David,Carter,30,Psychology,2.61,1,0,Los Angeles,Paid
+STU_1089,Aria,Garcia,30,Psychology,2.9,0.67,500,Boston,Paid
+STU_1090,Scarlett,Jones,30,Physics,2.42,0.8,0,Seattle,Paid
+STU_1091,Alexander,King,24,Computer Science,3.19,0.57,1000,Los Angeles,Paid
+STU_1092,Samuel,Jackson,22,Chemistry,3.25,0.8,1000,Denver,Paid
+STU_1093,Christopher,Thompson,22,Philosophy,2.14,0.5,0,Boston,Paid
+STU_1094,John,Davis,25,Political Science,3.4,0.97,2000,Philadelphia,Paid
+STU_1095,Chloe,Martin,29,Psychology,2.5,0.45,0,Austin,Overdue
+STU_1096,Victoria,Young,30,Chemistry,2.94,0.79,0,San Diego,Paid
+STU_1097,Abigail,Allen,19,History,2.82,0.59,0,San Diego,Pending
+STU_1098,Michael,Harris,22,Biology,2.8,0.86,0,Boston,Paid
+STU_1099,James,Green,30,Biology,3.03,0.99,2000,San Diego,Paid
+STU_1100,Joseph,Hill,28,Computer Science,2.1,0.56,0,Seattle,Overdue
+STU_1101,Sophia,Jackson,28,Sociology,2.48,0.5,0,Boston,Paid
+STU_1102,Harper,Allen,25,Sociology,3.3,0.49,1500,San Diego,Pending
+STU_1103,Harper,Allen,25,Biology,3.1,0.63,1000,San Francisco,Pending
+STU_1104,Joseph,Adams,18,Philosophy,2.6,0.75,500,Dallas,Pending
+STU_1105,Ryan,White,23,Psychology,3.09,0.67,1500,Houston,Pending
+STU_1106,Matthew,Walker,21,Chemistry,2.82,0.59,500,Denver,Overdue
+STU_1107,Joseph,Rodriguez,25,Engineering,2.25,0.98,0,Phoenix,Pending
+STU_1108,William,Clark,18,Psychology,2.82,0.79,0,Houston,Paid
+STU_1109,Jonathan,Hill,28,Sociology,2.66,0.8,500,Austin,Overdue

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Reload | Student Data API{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <span class="eyebrow">Reload Data</span>
+    <h1>Refresh the CSV cache without restarting the app.</h1>
+    <p class="lead">
+        This page wraps the `/data/reload` flow with a browser-friendly form. Submitting the form sends a POST request to the same endpoint.
+    </p>
+    {% if message %}
+    <div class="notice">{{ message }}</div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="grid">
+    <article class="panel stack">
+        <div>
+            <h2>Reload Action</h2>
+            <p class="muted">Use this after editing the CSV file to refresh the in-memory cache.</p>
+        </div>
+        <form method="post" action="/data/reload" class="stack">
+            <button class="primary" type="submit">Reload CSV Data</button>
+        </form>
+        <div class="status-item">
+            <span>Current record count</span>
+            <strong>{{ total_records }}</strong>
+        </div>
+    </article>
+
+    <aside class="panel stack">
+        <div>
+            <h2>Status Snapshot</h2>
+            <p class="muted">The page refreshes this summary after a successful reload.</p>
+        </div>
+        <div class="status-list">
+            {% for status, count in status_breakdown.items() %}
+            <div class="status-item">
+                <span>{{ status }}</span>
+                <strong>{{ count }}</strong>
+            </div>
+            {% else %}
+            <div class="notice warn">No status values are available.</div>
+            {% endfor %}
+        </div>
+    </aside>
+</section>
+{% endblock %}

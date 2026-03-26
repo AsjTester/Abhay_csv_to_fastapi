@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Student Data API{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <span class="eyebrow">Frontend Overview</span>
+    <h1>Browser pages for your example routes.</h1>
+    <p class="lead">
+        The homepage, student list, filtered list, detail view, summary, and reload flow now have HTML pages.
+        The same endpoints still return JSON for API clients unless you explicitly request HTML.
+    </p>
+    {% if load_error %}
+    <div class="notice warn">{{ load_error }}</div>
+    {% endif %}
+    <div class="actions">
+        {% for item in example_links %}
+        <a class="button{% if loop.first %} primary{% endif %}" href="{{ item.url }}">{{ item.label }}</a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="metrics">
+    <article class="panel">
+        <div class="muted">Total Students</div>
+        <div class="metric-value">{{ summary.total }}</div>
+        <div class="muted">Loaded from the CSV cache.</div>
+    </article>
+    <article class="panel">
+        <div class="muted">Average GPA</div>
+        <div class="metric-value">{{ summary.avg_gpa if summary.avg_gpa is not none else "N/A" }}</div>
+        <div class="muted">Calculated from available GPA values.</div>
+    </article>
+    <article class="panel">
+        <div class="muted">Average Attendance</div>
+        <div class="metric-value">{{ summary.avg_attendance if summary.avg_attendance is not none else "N/A" }}</div>
+        <div class="muted">Attendance percentage average.</div>
+    </article>
+</section>
+
+<section class="grid">
+    <article class="panel stack">
+        <div>
+            <h2>Student Preview</h2>
+            <p class="muted">A quick first-page snapshot of the dataset rendered directly from FastAPI.</p>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Major</th>
+                        <th>City</th>
+                        <th>GPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td><a href="/data/{{ student.student_id }}">{{ student.student_id }}</a></td>
+                        <td>{{ student.first_name }} {{ student.last_name }}</td>
+                        <td>{{ student.major or "N/A" }}</td>
+                        <td>{{ student.city or "N/A" }}</td>
+                        <td>{{ student.gpa if student.gpa is not none else "N/A" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <aside class="panel stack">
+        <div>
+            <h2>Status Breakdown</h2>
+            <p class="muted">Summary values are also available on the dedicated summary page.</p>
+        </div>
+        <div class="status-list">
+            {% for status, count in summary.status_breakdown.items() %}
+            <div class="status-item">
+                <span>{{ status }}</span>
+                <strong>{{ count }}</strong>
+            </div>
+            {% endfor %}
+        </div>
+    </aside>
+</section>
+{% endblock %}

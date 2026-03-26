@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Student Detail | Student Data API{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <span class="eyebrow">Student Detail</span>
+    {% if student %}
+    <h1>{{ student.first_name }} {{ student.last_name }}</h1>
+    <p class="lead">
+        Detail page for `{{ student.student_id }}` rendered from the same `/data/{student_id}` endpoint.
+        Use the JSON link if you want the raw API payload.
+    </p>
+    <div class="chips">
+        <span class="chip">ID: {{ student.student_id }}</span>
+        <span class="chip">Major: {{ student.major or "N/A" }}</span>
+        <span class="chip">Status: {{ student.status or "N/A" }}</span>
+        <a class="chip" href="{{ json_url }}">Open JSON response</a>
+    </div>
+    {% else %}
+    <h1>Student not found.</h1>
+    <p class="lead">No record matched `{{ student_id }}`. Try another ID from the student list.</p>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block content %}
+{% if student %}
+<section class="panel stack">
+    <h2>Record Fields</h2>
+    <div class="detail-grid">
+        <div class="status-item"><span>First Name</span><strong>{{ student.first_name }}</strong></div>
+        <div class="status-item"><span>Last Name</span><strong>{{ student.last_name }}</strong></div>
+        <div class="status-item"><span>Age</span><strong>{{ student.age if student.age is not none else "N/A" }}</strong></div>
+        <div class="status-item"><span>Major</span><strong>{{ student.major or "N/A" }}</strong></div>
+        <div class="status-item"><span>GPA</span><strong>{{ student.gpa if student.gpa is not none else "N/A" }}</strong></div>
+        <div class="status-item"><span>Attendance</span><strong>{{ student.attendance if student.attendance is not none else "N/A" }}</strong></div>
+        <div class="status-item"><span>Scholarship</span><strong>{{ student.scholarship if student.scholarship is not none else "N/A" }}</strong></div>
+        <div class="status-item"><span>City</span><strong>{{ student.city or "N/A" }}</strong></div>
+        <div class="status-item"><span>Status</span><strong>{{ student.status or "N/A" }}</strong></div>
+    </div>
+</section>
+{% else %}
+<section class="panel stack">
+    <div class="notice warn">The requested student record does not exist.</div>
+    <div class="actions">
+        <a class="button primary" href="/data/">Back to Student List</a>
+        <a class="button" href="/data/summary">Open Summary</a>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

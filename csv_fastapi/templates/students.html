@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Students | Student Data API{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <span class="eyebrow">Student Listing</span>
+    <h1>{{ result.total }} students found.</h1>
+    <p class="lead">
+        This page powers both the plain `/data/` URL and filtered URLs like `?major=data+science&min_gpa=3.0`.
+        Use the form below to refine the results, or switch back to raw JSON when you need the API response.
+    </p>
+    <div class="chips">
+        <a class="chip" href="{{ json_url }}">Open JSON response</a>
+        <span class="chip">Page {{ result.page }} of {{ result.total_pages }}</span>
+        <span class="chip">Page size {{ result.page_size }}</span>
+        {% if filters.major %}<span class="chip">Major: {{ filters.major }}</span>{% endif %}
+        {% if filters.city %}<span class="chip">City: {{ filters.city }}</span>{% endif %}
+        {% if filters.status %}<span class="chip">Status: {{ filters.status }}</span>{% endif %}
+        {% if filters.min_gpa is not none %}<span class="chip">Min GPA: {{ filters.min_gpa }}</span>{% endif %}
+        {% if filters.max_gpa is not none %}<span class="chip">Max GPA: {{ filters.max_gpa }}</span>{% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="grid">
+    <article class="panel stack">
+        <div>
+            <h2>Filter Students</h2>
+            <p class="muted">Submit the form to generate browser-friendly filtered URLs on the same endpoint.</p>
+        </div>
+        <form method="get" action="/data/" class="stack">
+            <div class="form-grid">
+                <label>
+                    Major
+                    <input type="text" name="major" value="{{ filters.major or '' }}" placeholder="data science">
+                </label>
+                <label>
+                    City
+                    <input type="text" name="city" value="{{ filters.city or '' }}" placeholder="seattle">
+                </label>
+                <label>
+                    Status
+                    <select name="status">
+                        <option value="">Any</option>
+                        <option value="Paid"{% if filters.status == 'Paid' %} selected{% endif %}>Paid</option>
+                        <option value="Pending"{% if filters.status == 'Pending' %} selected{% endif %}>Pending</option>
+                        <option value="Overdue"{% if filters.status == 'Overdue' %} selected{% endif %}>Overdue</option>
+                    </select>
+                </label>
+                <label>
+                    Min GPA
+                    <input type="number" step="0.1" min="0" max="4" name="min_gpa" value="{{ filters.min_gpa if filters.min_gpa is not none else '' }}">
+                </label>
+                <label>
+                    Max GPA
+                    <input type="number" step="0.1" min="0" max="4" name="max_gpa" value="{{ filters.max_gpa if filters.max_gpa is not none else '' }}">
+                </label>
+                <label>
+                    Page Size
+                    <select name="page_size">
+                        <option value="10"{% if filters.page_size == 10 %} selected{% endif %}>10</option>
+                        <option value="20"{% if filters.page_size == 20 %} selected{% endif %}>20</option>
+                        <option value="50"{% if filters.page_size == 50 %} selected{% endif %}>50</option>
+                        <option value="100"{% if filters.page_size == 100 %} selected{% endif %}>100</option>
+                    </select>
+                </label>
+            </div>
+            <input type="hidden" name="page" value="1">
+            <div class="actions">
+                <button class="primary" type="submit">Apply Filters</button>
+                <a class="button" href="/data/">Reset</a>
+            </div>
+        </form>
+    </article>
+
+    <aside class="panel stack">
+        <div>
+            <h2>Result Snapshot</h2>
+            <p class="muted">Filtered totals update using the same backend logic as the JSON API.</p>
+        </div>
+        <div class="status-list">
+            <div class="status-item"><span>Total matches</span><strong>{{ result.total }}</strong></div>
+            <div class="status-item"><span>Current page</span><strong>{{ result.page }}</strong></div>
+            <div class="status-item"><span>Total pages</span><strong>{{ result.total_pages }}</strong></div>
+        </div>
+    </aside>
+</section>
+
+<section class="panel stack">
+    <div>
+        <h2>Students</h2>
+        <p class="muted">Click any student ID to open the detail page for that record.</p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Major</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th>GPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td><a href="/data/{{ student.student_id }}">{{ student.student_id }}</a></td>
+                    <td>{{ student.first_name }} {{ student.last_name }}</td>
+                    <td>{{ student.major or "N/A" }}</td>
+                    <td>{{ student.city or "N/A" }}</td>
+                    <td>{{ student.status or "N/A" }}</td>
+                    <td>{{ student.gpa if student.gpa is not none else "N/A" }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No students matched the current filters.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        <div class="muted">Showing {{ students|length }} record(s) on this page.</div>
+        <div class="nav">
+            {% if prev_url %}<a href="{{ prev_url }}">Previous</a>{% endif %}
+            {% if next_url %}<a href="{{ next_url }}">Next</a>{% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
