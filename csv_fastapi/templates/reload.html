@@ -4,13 +4,13 @@
 
 {% block hero %}
 <section class="hero">
-    <span class="eyebrow">Reload Data</span>
-    <h1>Refresh the CSV cache without restarting the app.</h1>
+    <span class="eyebrow">Sync Data</span>
+    <h1>Refresh the MySQL table from the CSV file without restarting the app.</h1>
     <p class="lead">
-        This page wraps the `/data/reload` flow with a browser-friendly form. Submitting the form sends a POST request to the same endpoint.
+        This page wraps the `/data/reload` flow with a browser-friendly form. Submitting the form re-imports the CSV into MySQL using the CSV filename as the table name.
     </p>
     {% if message %}
-    <div class="notice">{{ message }}</div>
+    <div class="notice{% if is_error %} warn{% endif %}">{{ message }}</div>
     {% endif %}
 </section>
 {% endblock %}
@@ -19,11 +19,15 @@
 <section class="grid">
     <article class="panel stack">
         <div>
-            <h2>Reload Action</h2>
-            <p class="muted">Use this after editing the CSV file to refresh the in-memory cache.</p>
+            <h2>Sync Action</h2>
+            <p class="muted">Use this after editing the CSV file to rebuild the MySQL table from the latest file contents.</p>
+        </div>
+        <div class="chips">
+            <span class="chip">CSV: {{ source.csv_path }}</span>
+            <span class="chip">MySQL: {{ source.database }}.{{ source.table_name }}</span>
         </div>
         <form method="post" action="/data/reload" class="stack">
-            <button class="primary" type="submit">Reload CSV Data</button>
+            <button class="primary" type="submit">Sync CSV to MySQL</button>
         </form>
         <div class="status-item">
             <span>Current record count</span>
@@ -34,7 +38,7 @@
     <aside class="panel stack">
         <div>
             <h2>Status Snapshot</h2>
-            <p class="muted">The page refreshes this summary after a successful reload.</p>
+            <p class="muted">The page refreshes this summary after a successful sync.</p>
         </div>
         <div class="status-list">
             {% for status, count in status_breakdown.items() %}

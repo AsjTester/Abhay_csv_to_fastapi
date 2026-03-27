@@ -5,7 +5,7 @@
 {% block hero %}
 <section class="hero">
     <span class="eyebrow">Dataset Summary</span>
-    <h1>High-level stats for the CSV dataset.</h1>
+    <h1>High-level stats for the MySQL-backed student dataset.</h1>
     <p class="lead">
         This page is the HTML view for `/data/summary`, with the raw JSON response still available from the same endpoint.
     </p>
@@ -13,6 +13,7 @@
         <a class="chip" href="{{ json_url }}">Open JSON response</a>
         <span class="chip">Records: {{ summary.total }}</span>
         <span class="chip">Statuses: {{ summary.status_breakdown|length }}</span>
+        <span class="chip">MySQL: {{ source.database }}.{{ source.table_name }}</span>
     </div>
 </section>
 {% endblock %}
@@ -37,7 +38,7 @@
     <article class="panel stack">
         <div>
             <h2>Status Breakdown</h2>
-            <p class="muted">Count of each status value found in the dataset.</p>
+            <p class="muted">Count of each status value currently stored in MySQL.</p>
         </div>
         <div class="status-list">
             {% for status, count in summary.status_breakdown.items() %}

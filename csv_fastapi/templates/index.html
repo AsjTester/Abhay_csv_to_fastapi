@@ -7,7 +7,7 @@
     <span class="eyebrow">Frontend Overview</span>
     <h1>Browser pages for your example routes.</h1>
     <p class="lead">
-        The homepage, student list, filtered list, detail view, summary, and reload flow now have HTML pages.
+        The homepage, student list, filtered list, detail view, summary, and sync flow now have HTML pages.
         The same endpoints still return JSON for API clients unless you explicitly request HTML.
     </p>
     {% if load_error %}
@@ -26,7 +26,7 @@
     <article class="panel">
         <div class="muted">Total Students</div>
         <div class="metric-value">{{ summary.total }}</div>
-        <div class="muted">Loaded from the CSV cache.</div>
+        <div class="muted">Read from MySQL table {{ source.table_name }}.</div>
     </article>
     <article class="panel">
         <div class="muted">Average GPA</div>
@@ -44,7 +44,11 @@
     <article class="panel stack">
         <div>
             <h2>Student Preview</h2>
-            <p class="muted">A quick first-page snapshot of the dataset rendered directly from FastAPI.</p>
+            <p class="muted">A quick first-page snapshot queried directly from MySQL through FastAPI.</p>
+        </div>
+        <div class="chips">
+            <span class="chip">Database: {{ source.database }}</span>
+            <span class="chip">Table: {{ source.table_name }}</span>
         </div>
         <div class="table-wrap">
             <table>

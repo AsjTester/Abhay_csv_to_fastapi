@@ -1,122 +1,106 @@
-# 🎓 Student Data API
+# Student Data API
 
-A **FastAPI** service that loads student records from a CSV file into memory at startup and exposes clean, documented REST endpoints for fetching, filtering, and summarizing the data.
+A FastAPI service that imports student records from a CSV file into a MySQL table on localhost and then serves filtering, detail, and summary endpoints from MySQL.
 
----
+## Project Structure
 
-## 📁 Project Structure
-
-```
-student_api/
-├── main.py                  # FastAPI app entry point
-├── requirements.txt
-├── data/
-│   └── students_complete.csv
-└── app/
-    ├── models/
-    │   └── student.py       # Pydantic response models
-    ├── routers/
-    │   └── students.py      # Route definitions
-    └── services/
-        └── data_service.py  # CSV loading, caching, filtering logic
+```text
+csv_fastapi/
+|-- main.py
+|-- requirements.txt
+|-- data/
+|   `-- students_complete.csv
+`-- app/
+    |-- models/
+    |   `-- student.py
+    |-- routers/
+    |   `-- students.py
+    `-- services/
+        `-- data_service.py
 ```
 
----
+## What Changed
 
-## ⚙️ Setup & Run
+- On startup, the app connects to MySQL and creates the database if it does not already exist.
+- It creates a table named from the CSV filename stem.
+  Example: `students_complete.csv` becomes table `students_complete`.
+- `POST /data/reload` re-imports the CSV into MySQL.
+- All student list, detail, filter, and summary endpoints now read from MySQL instead of an in-memory cache.
 
-### 1. Clone / navigate to the project
-```bash
-cd student_api
+## Prerequisites
+
+- Python 3.11+
+- MySQL running on `localhost:3306`
+- A MySQL user that can create databases and tables
+
+## Setup
+
+### 1. Create and activate a virtual environment
+
+```powershell
+python -m venv csvreader
+.\csvreader\Scripts\Activate.ps1
 ```
 
-### 2. Create a virtual environment
-```bash
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-```
+### 2. Install dependencies
 
-### 3. Install dependencies
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
-### 4. Run the server
-```bash
+### 3. Configure MySQL connection settings
+
+PowerShell example:
+
+```powershell
+$env:MYSQL_HOST='localhost'
+$env:MYSQL_PORT='3306'
+$env:MYSQL_USER='root'
+$env:MYSQL_PASSWORD='your_password'
+$env:MYSQL_DATABASE='csv_fastapi'
+```
+
+Optional CSV override:
+
+```powershell
+$env:CSV_FILE_PATH='data/students_complete.csv'
+```
+
+If you point `CSV_FILE_PATH` to `data/student.csv`, the app will create and use table `student`.
+
+### 4. Run the API
+
+```powershell
 uvicorn main:app --reload
 ```
 
-The API will be live at: **http://127.0.0.1:8000**
+The API will be available at `http://127.0.0.1:8000`.
 
----
-
-## 📖 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/` | Health check |
-| `GET` | `/health` | Health check (JSON) |
+| `GET` | `/` | HTML homepage |
+| `GET` | `/health` | Health details including configured database/table |
 | `GET` | `/data/` | All students (filterable + paginated) |
-| `GET` | `/data/summary` | Aggregate stats |
+| `GET` | `/data/summary` | Aggregate stats from MySQL |
 | `GET` | `/data/{student_id}` | Single student by ID |
-| `POST` | `/data/reload` | Reload CSV from disk |
+| `GET` | `/data/reload` | HTML sync page |
+| `POST` | `/data/reload` | Re-import CSV into MySQL |
 
-### 🔍 Filter & Pagination Query Params (`GET /data/`)
+## Example Requests
 
-| Param | Type | Description |
-|-------|------|-------------|
-| `major` | string | Partial match on major (e.g. `science`) |
-| `city` | string | Partial match on city (e.g. `seattle`) |
-| `status` | string | Exact match: `Paid`, `Pending`, `Overdue` |
-| `min_gpa` | float | Minimum GPA (0.0–4.0) |
-| `max_gpa` | float | Maximum GPA (0.0–4.0) |
-| `page` | int | Page number (default: 1) |
-| `page_size` | int | Records per page (default: 20, max: 100) |
-
----
-
-## 🧪 Example Requests
-
-```bash
-# All students
+```powershell
 curl http://127.0.0.1:8000/data/
-
-# Filter by major and minimum GPA
 curl "http://127.0.0.1:8000/data/?major=data+science&min_gpa=3.0"
-
-# Filter by city and status
-curl "http://127.0.0.1:8000/data/?city=seattle&status=Paid"
-
-# Get specific student
 curl http://127.0.0.1:8000/data/STU_1000
-
-# Dataset summary
 curl http://127.0.0.1:8000/data/summary
-
-# Reload CSV after editing
 curl -X POST http://127.0.0.1:8000/data/reload
 ```
 
----
+## Notes
 
-## ✅ Interactive Docs
-
-FastAPI auto-generates Swagger UI at:
-- **Swagger:** http://127.0.0.1:8000/docs
-- **ReDoc:** http://127.0.0.1:8000/redoc
-
----
-
-## 🧠 Design Decisions
-
-- **CSV loaded once at startup** using `functools.lru_cache` — no re-reading on every request.
-- **`/data/reload`** endpoint lets you refresh in-memory data without restarting the server.
-- **Pydantic models** validate and serialize all responses cleanly.
-- **Edge cases handled**: missing GPA values, mixed-case majors, case-insensitive ID lookups.
-- Filtering is done **in-memory** (no DB), suitable for datasets up to ~100k rows.
-
----
-
-## 👥 Team
-
-**Project-K** | Team Members: Abhay Shankar Jaiswal 
+- The app auto-creates the configured MySQL database if permissions allow it.
+- The table name always comes from the CSV filename.
+- The import step clears the destination table and loads the latest CSV contents.
+- If MySQL is unavailable, the homepage and reload page show the connection error so you can fix the local configuration.
